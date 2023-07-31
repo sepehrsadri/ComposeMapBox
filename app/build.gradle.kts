@@ -66,13 +66,12 @@ android {
 }
 
 dependencies {
+    implementation(project(":feature:map"))
     implementation(project(":library:designsystem"))
 
     implementation(Libs.Common.kotlinLib)
     implementation(Libs.Common.coroutines)
     implementation(Libs.Common.coroutinesAndroid)
-
-    implementation(Libs.Common.mapBox)
 
     implementation(Libs.Common.viewModelKtx)
     implementation(Libs.Common.liveDataKtx)

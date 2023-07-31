@@ -1,4 +1,4 @@
-package com.sadri.composemovie.designsystem.theme
+package com.sadri.mapbox.designsystem.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.PlatformTextStyle
