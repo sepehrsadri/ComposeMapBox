@@ -64,3 +64,10 @@ vendor
 .settings
 
 scripts/__pycache__/
+
+# Android Studio / IntelliJ IDEA
+*.iws
+.idea/libraries
+.idea/tasks.xml
+.idea/vcs.xml
+.idea/workspace.xml

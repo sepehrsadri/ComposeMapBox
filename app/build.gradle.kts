@@ -66,6 +66,8 @@ android {
 }
 
 dependencies {
+    implementation(project(":library:designsystem"))
+
     implementation(Libs.Common.kotlinLib)
     implementation(Libs.Common.coroutines)
     implementation(Libs.Common.coroutinesAndroid)
