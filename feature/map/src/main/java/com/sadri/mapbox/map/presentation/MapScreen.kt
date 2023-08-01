@@ -1,4 +1,4 @@
-package com.sadri.mapbox.map
+package com.sadri.mapbox.map.presentation
 
 import android.Manifest
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -33,27 +33,30 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.mapbox.geojson.Point
 import com.sadri.mapbox.designsystem.component.ContentDescription
 import com.sadri.mapbox.designsystem.theme.space
+import com.sadri.mapbox.map.R
+import com.sadri.mapbox.navigation.model.NavigationModeEntity
+import com.sadri.mapbox.navigation.presentation.NavigationViewModel
+import timber.log.Timber
 
 
 @Composable
 fun MapScreen(
-  viewModel: MapViewModel = hiltViewModel()
+  mapViewModel: MapViewModel = hiltViewModel(),
+  navigationViewModel: NavigationViewModel = hiltViewModel()
 ) {
-  val state = viewModel.viewState.collectAsState().value
+  val mapViewState = mapViewModel.viewState.collectAsState().value
+  val navigationViewState = navigationViewModel.viewState.collectAsState().value
 
   var permission by remember {
     mutableStateOf(false)
   }
 
-  val onPermissionDenied = remember {
-    { viewModel.onPermissionDenied() }
-  }
   val onPermissionAccepted = remember {
-    { viewModel.onPermissionAccepted() }
+    { mapViewModel.onPermissionAccepted() }
   }
   val onMapLongClick: (Point) -> Unit = remember {
     { point ->
-      viewModel.onMapLongClick(point)
+      mapViewModel.onMapLongClick(point)
     }
   }
 
@@ -62,7 +65,7 @@ fun MapScreen(
     onResult = { permissions ->
       if (permission) return@rememberLauncherForActivityResult
       if (!permissions.values.all { it }) {
-        onPermissionDenied.invoke()
+        // no-op
       } else {
         permission = true
         onPermissionAccepted.invoke()
@@ -84,7 +87,7 @@ fun MapScreen(
       FloatingActionButton(
         modifier = Modifier.size(MaterialTheme.space.xxLarge),
         backgroundColor = MaterialTheme.colorScheme.onSurface,
-        onClick = viewModel::moveToCurrentLocation
+        onClick = mapViewModel::moveToCurrentLocation
       ) {
         Icon(
           painter = painterResource(id = R.drawable.ic_current_location),
@@ -97,31 +100,39 @@ fun MapScreen(
     Box(
       modifier = modifier.fillMaxSize(),
     ) {
-      MapBoxMap(
-        point = state.point,
-        destinationPoint = state.destinationPoint,
-        modifier = Modifier.fillMaxSize()
+      MapboxMap(
+        modifier = Modifier.fillMaxSize(),
+        state = MapboxMapState(
+          originPoint = mapViewState.originPoint,
+          destinationPoint = mapViewState.destinationPoint,
+          navigationRoute = navigationViewState.navigationRoute
+        )
       ) { longClickedPoint ->
         onMapLongClick.invoke(longClickedPoint)
       }
 
-      when {
-        state.loading -> {
-          Loading()
-        }
+      if (mapViewState.loading) {
+        Loading()
       }
-      when (state.mode) {
-        NavigationMode.SELECT_ORIGIN -> {
+
+      Timber.d("WTF : navigation mode : ${navigationViewState.mode.name}")
+
+      when (navigationViewState.mode) {
+        NavigationModeEntity.SELECT_ORIGIN -> {
           ShowGuideText(text = R.string.select_origin)
         }
-        NavigationMode.SELECT_DESTINATION -> {
+        NavigationModeEntity.SELECT_DESTINATION -> {
           ShowGuideText(text = R.string.select_destination)
         }
-        NavigationMode.NAVIGATION -> {
+        NavigationModeEntity.NAVIGATION -> {
           ShowGuideText(text = R.string.start_navigation)
         }
-        NavigationMode.DRIVE -> {
-
+        NavigationModeEntity.ROUTING -> {
+          Loading()
+          ShowGuideText(text = R.string.routing)
+        }
+        NavigationModeEntity.DRIVE -> {
+          // no-op
         }
       }
     }

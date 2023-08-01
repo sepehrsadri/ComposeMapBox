@@ -42,5 +42,6 @@ include(
 include(
   ":library:designsystem",
   ":library:core",
-  ":library:location"
+  ":library:location",
+  ":library:navigation"
 )

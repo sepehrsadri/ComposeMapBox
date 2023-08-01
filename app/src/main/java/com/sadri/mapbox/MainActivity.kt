@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import com.sadri.mapbox.designsystem.theme.ComposeMapBoxTheme
-import com.sadri.mapbox.map.MapScreen
+import com.sadri.mapbox.map.presentation.MapScreen
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

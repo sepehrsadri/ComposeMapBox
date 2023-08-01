@@ -1,4 +1,4 @@
-package com.sadri.mapbox.location
+package com.sadri.mapbox.location.domain
 
 import android.content.Context
 import android.location.Location
@@ -6,6 +6,7 @@ import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Bundle
 import com.sadri.mapbox.core.dispatcher.DispatcherProvider
+import com.sadri.mapbox.location.util.isSame
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
