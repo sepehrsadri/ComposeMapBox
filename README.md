@@ -10,6 +10,9 @@ utilized with `Android Jetpack` contains: Compose, Hilt and ...
 
 This app shows the usage of the new Android Jetpack and Architecture Components.
 
+![VID_20230801_225239_501_2_2](https://github.com/sepehrsadri/ComposeMapBox/assets/41581915/d32a4118-05b2-40f4-ad23-fd9db29eb669)
+
+
 **App features:**
 
 - Show map and current location
