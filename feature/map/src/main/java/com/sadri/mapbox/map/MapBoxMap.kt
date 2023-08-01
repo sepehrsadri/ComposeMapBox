@@ -1,5 +1,7 @@
 package com.sadri.mapbox.map
 
+import android.graphics.Bitmap
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -19,18 +21,21 @@ import com.mapbox.maps.plugin.annotation.annotations
 import com.mapbox.maps.plugin.annotation.generated.PointAnnotationManager
 import com.mapbox.maps.plugin.annotation.generated.PointAnnotationOptions
 import com.mapbox.maps.plugin.annotation.generated.createPointAnnotationManager
-import com.mapbox.maps.plugin.gestures.addOnMapClickListener
-
 
 @Composable
 fun MapBoxMap(
   modifier: Modifier = Modifier,
-  onPointChange: (Point) -> Unit,
   point: Point?,
 ) {
   val context = LocalContext.current
   val marker = remember(context) {
-    context.getDrawable(R.drawable.ic_marker)!!.toBitmap()
+    Bitmap.createScaledBitmap(
+      AppCompatResources.getDrawable(context, R.drawable.ic_marker)!!.toBitmap(),
+      MARKER_SIZE,
+      MARKER_SIZE,
+      true
+    )
+
   }
   var pointAnnotationManager: PointAnnotationManager? by remember {
     mutableStateOf(null)
@@ -41,11 +46,6 @@ fun MapBoxMap(
         mapView.getMapboxMap().loadStyleUri(Style.TRAFFIC_DAY)
         val annotationApi = mapView.annotations
         pointAnnotationManager = annotationApi.createPointAnnotationManager()
-
-        mapView.getMapboxMap().addOnMapClickListener { p ->
-          onPointChange(p)
-          true
-        }
       }
     },
     update = { mapView ->
@@ -58,7 +58,7 @@ fun MapBoxMap(
 
           it.create(pointAnnotationOptions)
           mapView.getMapboxMap()
-            .flyTo(CameraOptions.Builder().zoom(16.0).center(point).build())
+            .flyTo(CameraOptions.Builder().zoom(DEFAULT_ZOOM).center(point).build())
         }
       }
       NoOpUpdate
@@ -66,3 +66,6 @@ fun MapBoxMap(
     modifier = modifier
   )
 }
+
+private const val MARKER_SIZE = 64
+private const val DEFAULT_ZOOM = 16.0

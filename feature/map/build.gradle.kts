@@ -2,6 +2,8 @@ plugins {
   id(Plugins.androidLibrary)
   id(Plugins.kotlinAndroid)
   id(Plugins.kotlinParcelize)
+  id(Plugins.kotlinKapt)
+  id(Plugins.hilt)
   id(Plugins.composeCompilerHtmlReport) version Versions.composeCompilerHtmlReport
 }
 
@@ -33,6 +35,9 @@ android {
 }
 
 dependencies {
+  implementation(project(":library:location"))
+  implementation(project(":library:designsystem"))
+
   implementation(Libs.Common.kotlinLib)
   implementation(Libs.Common.coroutines)
   implementation(Libs.Common.coroutinesAndroid)
@@ -52,6 +57,13 @@ dependencies {
   implementation(Libs.Common.composeMaterial3)
   implementation(Libs.Common.composeMaterial)
   implementation(Libs.Common.material3WindowSize)
+
+  implementation(Libs.Common.hiltNavigationCompose)
+  implementation(Libs.Common.navigation)
+  implementation(Libs.Common.navigationKtx)
+
+  implementation(Libs.Common.hilt)
+  kapt(Libs.Common.hiltCompiler)
 
   implementation(Libs.Common.mapBox)
 }
