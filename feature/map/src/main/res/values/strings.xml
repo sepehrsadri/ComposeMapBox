@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="select_origin">To start navigation long click on your Origin</string>
+    <string name="select_destination">now long click on your Destination</string>
+    <string name="start_navigation">Route found ! To start Navigation click on Drive</string>
+    <string name="drive">Drive</string>
+</resources>
