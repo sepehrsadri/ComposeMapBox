@@ -22,8 +22,7 @@ dependencyResolutionManagement {
         // This should always be `mapbox` (not your username).
         username = "mapbox"
         // Use the secret token you stored in gradle.properties as the password
-        password =
-          "sk.eyJ1Ijoic2VwaXNhZHJpIiwiYSI6ImNsa3F1NnloOTBubHQzaXBuOTZkd3ZvcXMifQ.x1f7oyrHaYOKMbqfQlSGlQ"
+        password = System.getenv("MAPBOX_DOWNLOADS_TOKEN")
       }
     }
   }
