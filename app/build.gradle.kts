@@ -67,6 +67,9 @@ android {
 
 dependencies {
     implementation(project(":feature:map"))
+    implementation(project(":library:navigation"))
+    implementation(project(":library:location"))
+    implementation(project(":library:core"))
     implementation(project(":library:designsystem"))
 
     implementation(Libs.Common.kotlinLib)

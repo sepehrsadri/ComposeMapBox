@@ -1,4 +1,4 @@
-package com.sadri.mapbox.location
+package com.sadri.mapbox.location.util
 
 import android.location.Location
 import com.mapbox.geojson.Point
@@ -13,4 +13,9 @@ fun Location.toPoint(): Point {
     this.longitude,
     this.latitude
   )
+}
+
+fun Point.isSame(point: Point): Boolean {
+  return this.latitude() == point.latitude() &&
+     this.longitude() == point.longitude()
 }

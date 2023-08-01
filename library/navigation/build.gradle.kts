@@ -8,7 +8,7 @@ plugins {
 }
 
 android {
-  namespace = "com.sadri.mapbox.map"
+  namespace = "com.sadri.mapbox.navigation"
   compileSdk = Android.compileSdkVersion
 
   defaultConfig {
@@ -35,9 +35,8 @@ android {
 }
 
 dependencies {
+  implementation(project(":library:core"))
   implementation(project(":library:location"))
-  implementation(project(":library:navigation"))
-  implementation(project(":library:designsystem"))
 
   implementation(Libs.Common.kotlinLib)
   implementation(Libs.Common.coroutines)
@@ -60,11 +59,12 @@ dependencies {
   implementation(Libs.Common.material3WindowSize)
 
   implementation(Libs.Common.hiltNavigationCompose)
+  implementation(Libs.Common.navigation)
+  implementation(Libs.Common.navigationKtx)
 
   implementation(Libs.Common.hilt)
   kapt(Libs.Common.hiltCompiler)
 
-  implementation(Libs.Common.mapBox)
   implementation(Libs.Common.mapBoxNavigation)
 
   implementation(Libs.Common.timber)
