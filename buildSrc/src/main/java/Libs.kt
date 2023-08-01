@@ -8,6 +8,7 @@ object Libs {
 
         // Mapbox
         const val mapBox = "com.mapbox.maps:android:${Versions.mapBox}"
+        const val gmsLocation = "com.google.android.gms:play-services-location:${Versions.gmsLocation}"
 
         // Jetpack
         const val coreKtx = "androidx.core:core-ktx:${Versions.coreKtx}"
