@@ -1,14 +1,17 @@
 package com.sadri.mapbox.map
 
+import androidx.compose.runtime.Immutable
 import com.mapbox.geojson.Point
 
-sealed class MapViewState(val point: Point?) {
-  object Permission : MapViewState(null)
-  object Loading : MapViewState(null)
-   class CurrentLocation( point: Point) : MapViewState(point)
-  data class Navigation(val mode: NavigationMode) : MapViewState(null)
-}
+@Immutable
+data class MapViewState(
+  val point: Point? = null,
+  val destinationPoint: Point? = null,
+  val loading: Boolean = true,
+  val mode: NavigationMode = NavigationMode.SELECT_ORIGIN
+)
 
+@Immutable
 enum class NavigationMode {
   SELECT_ORIGIN, SELECT_DESTINATION, NAVIGATION, DRIVE
 }
