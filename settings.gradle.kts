@@ -40,5 +40,7 @@ include(
 
 // Library
 include(
-  ":library:designsystem"
+  ":library:designsystem",
+  ":library:core",
+  ":library:location"
 )
