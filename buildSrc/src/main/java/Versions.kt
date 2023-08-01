@@ -1,7 +1,6 @@
 object Versions {
 
     const val mapBox = "10.15.0"
-    const val gmsLocation = "12.0.1"
     const val gradle = "7.3.1"
     const val kotlin = "1.8.22"
     const val coroutines = "1.6.4"
