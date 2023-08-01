@@ -33,7 +33,14 @@ rootProject.name = "mapbox"
 // App
 include(":app")
 
+// Feature
+include(
+  ":feature:map"
+)
+
 // Library
 include(
-  ":library:designsystem"
+  ":library:designsystem",
+  ":library:core",
+  ":library:location"
 )
